@@ -1,8 +1,13 @@
+import './Home.css';
+
 const App = () => {
-  // Replace this with your code. Good luck!
   return (
-    <div>
-      <h1>Spring 2026 Hack4Impact-UMD Technical Application Assessment</h1>
+    <div className="center">
+      <h1>🌏 Air Quality Tracker</h1>
+      <p> Search for any city to see PM2.5 air quality data</p>
+      <div className="container">
+        
+      </div>
     </div>
   );
 };

@@ -1,0 +1,29 @@
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+}
+
+.container {
+    border: 2px solid;
+    width: 200px;
+    margin: 10px;
+    text-align: center;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    margin-bottom: 0.5rem;
+    font-size: 50px;
+    color: white
+}
+
+p {
+    margin-top: 0;
+    font-size: 20px;
+    color: white
+}
