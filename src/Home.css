@@ -3,11 +3,28 @@ body {
     min-height: 100vh;
 }
 
+.searchBar {
+  width: 53%;
+  height: 42px;
+  background-color: white;
+  border-color: white;
+  border-radius: 15px;
+  padding: 3px;
+  padding-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  font-size: 16px;
+}
+
 .container {
-    border: 2px solid;
-    width: 200px;
+    width: 55%;
+    height: 210px;
+    background-color: white;
     margin: 10px;
+    display: grid;
+    place-content: center;
     text-align: center;
+    border-radius: 20px;
 }
 
 .center {
@@ -17,13 +34,17 @@ body {
 }
 
 h1 {
+    margin-top: 0.7rem;
     margin-bottom: 0.5rem;
-    font-size: 50px;
+    font-size: 46px;
     color: white
+}
+
+h2 {
+    color: #667eea
 }
 
 p {
     margin-top: 0;
-    font-size: 20px;
-    color: white
+    font-size: 17px;
 }
