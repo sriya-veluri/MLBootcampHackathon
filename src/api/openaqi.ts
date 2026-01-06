@@ -1,6 +1,6 @@
 import { AirQualityData, LatestMeasurementResponse, LocationSearchResponse } from "../types";
 
-// const API_KEY = XXX;
+const API_KEY = "9921b318c8bd88c80fc00f8a9139a53d852fe077ef50e42a3ca95d7f34986fef";
 const BASE_URL = "/api";
 
 
