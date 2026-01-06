@@ -1,4 +1,5 @@
 import './City.css';
+import CityCard from './CityCard'
 
 type Props = {
     city: string;
@@ -6,6 +7,9 @@ type Props = {
 };
 
 function CityPage({ city, Back }: Props) {
+    const value = 42;
+    const stat = "Good";
+    const timestamp = new Date();
     return (
         <>
             <div className="header">
@@ -14,7 +18,13 @@ function CityPage({ city, Back }: Props) {
             </div>
             <div className="city-center">
                 <div className="city-container">
-                    <h2>{city}</h2>
+                    <h2 style={{color:"black", fontSize:"40px", paddingLeft:"30px"}}>{city}</h2>
+                    {(<CityCard
+                        location={city}
+                        value={value}
+                        status={stat}
+                        timestamp={timestamp}
+                    />)}
                 </div>
             </div>
         </>
