@@ -37,12 +37,11 @@ function CityCard ({city, location, value, status, timestamp}: Props) {
 
             <div className="value-row">
                 <p className="value">{value}</p>
-                <p style={{fontSize:"30px"}}>μg/m<sup>3</sup></p>
+                <p style={{fontSize:"30px", color:"#666666"}}>μg/m<sup>3</sup></p>
             </div>
 
-            <div className="gradient-line">
-                
-            </div>
+            <span>PM2.5</span>
+            <div className="gradient-line"></div>
 
             <div className="info">
                 <p className="label">MONITOR LOCATION</p>

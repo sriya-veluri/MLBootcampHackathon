@@ -3,14 +3,6 @@ body {
     min-height: 100vh;
 }
 
-.city-container {
-    width: 40%;
-    height: 400px;
-    background-color: white;
-    margin-top: 100px;
-    border-radius: 20px;
-}
-
 .city-center {
     display: flex;
     flex-direction: column;
