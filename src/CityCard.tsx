@@ -12,7 +12,7 @@ function CityCard ({city, location, value, status, timestamp}: Props) {
     return(
         <div className="city-container">
             <div className="card-header">
-                <h2 style={{color:"black", fontSize:"36px", paddingLeft:"30px"}}>{city}</h2>
+                <h2 style={{color:"#333333", fontSize:"36px", paddingLeft:"30px"}}>{city}</h2>
                 {status === "Good" && (
                     <div className="status status-good">
                         <p>{status}</p>
@@ -37,6 +37,11 @@ function CityCard ({city, location, value, status, timestamp}: Props) {
 
             <div className="value-row">
                 <p className="value">{value}</p>
+                <p style={{fontSize:"30px"}}>μg/m<sup>3</sup></p>
+            </div>
+
+            <div className="gradient-line">
+                
             </div>
 
             <div className="info">
