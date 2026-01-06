@@ -1,0 +1,59 @@
+.status {
+    font-size: 10px;
+    border: none;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    border-radius: 20px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: bold;
+}
+
+.status-good {
+    background-color: #28a745;
+    color: #0f401b;
+}
+
+.status-moderate {
+    background-color: #ffc107;
+    color: #4c3c0a;
+}
+
+.status-unhealthy {
+    background-color: #dc3545;
+    color: #4d0910;
+}
+
+.status-very-unhealthy {
+    background-color: #8b2e9f;
+    color: #370b41;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+}
+
+.value-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.value {
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.info {
+  margin-top: 16px;
+}
+
+.label {
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  opacity: 0.7;
+  margin-top: 16px;
+}

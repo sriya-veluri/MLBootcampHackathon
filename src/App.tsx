@@ -9,7 +9,7 @@ const App = () => {
   const [city, setCity] = useState('');
 
   const input = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCity(event.target.value.toLowerCase());
+    setCity(event.target.value);
   };
   return (
     <>

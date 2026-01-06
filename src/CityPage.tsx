@@ -8,8 +8,10 @@ type Props = {
 
 function CityPage({ city, Back }: Props) {
     const value = 42;
-    const stat = "Good";
+    const stat = "Very Unhealthy";
     const timestamp = new Date();
+    const dispcity = city;
+    const location = "loc";
     return (
         <>
             <div className="header">
@@ -17,15 +19,13 @@ function CityPage({ city, Back }: Props) {
                 <h1>🌏 Air Quality Tracker</h1>
             </div>
             <div className="city-center">
-                <div className="city-container">
-                    <h2 style={{color:"black", fontSize:"40px", paddingLeft:"30px"}}>{city}</h2>
-                    {(<CityCard
-                        location={city}
-                        value={value}
-                        status={stat}
-                        timestamp={timestamp}
-                    />)}
-                </div>
+                {(<CityCard
+                    city={dispcity}
+                    location={location}
+                    value={value}
+                    status={stat}
+                    timestamp={timestamp}
+                />)}
             </div>
         </>
     );
