@@ -51,7 +51,7 @@ const App = () => {
           aqd={airquality}
           Back={() => setPage('home')}
         />
-      )}
+      )} 
     </>
   );
 };

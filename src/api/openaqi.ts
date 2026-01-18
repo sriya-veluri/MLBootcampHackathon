@@ -14,7 +14,18 @@ export const fetchAirQualityByCoordinates = async (latitude: number, longitude: 
 */
     try { 
         // Step 1: Search for nearby PM2.5 monitors using bounding box
+        // bouding box (10km)
+        const minLat = latitude - 0.1;
+        const maxLat = latitude + 0.1;
+        const minLong = longitude - 0.1;
+        const maxLong = longitude + 0.1;
 
+        const url = `${BASE_URL}/locations?bbox=${minLong},${minLat},${maxLong},${maxLat}&parameter=pm25&limit=10`;
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error(`OpenAqi Error: ${response.status}`);
+        }
 
         // Step 2: Find the most recently active location
         
