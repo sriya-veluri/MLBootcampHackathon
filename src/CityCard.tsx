@@ -43,7 +43,9 @@ function CityCard ({city, location, aqd, status, timestamp}: Props) {
 
             
             {aqd.pm25 == null && (
-                <p className="value">No Data</p>
+                <div className="value-row">
+                    <p className="value">No Data</p>
+                </div>
             )}
 
             {aqd.pm25 != null && (

@@ -1,12 +1,14 @@
 import './Home.css';
+import { City } from "./types";
 
 type Props = {
   city: string;
   input: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  Enter: () => void;
+  results?: City[];
+  onSelect: (city: City) => void;
 };
 
-function HomePage({ city, input, Enter}: Props) {
+function HomePage({ city, input, results, onSelect }: Props) {
   return (
     <div className="center">
       <h1>🌏 Air Quality Tracker</h1>
@@ -17,8 +19,20 @@ function HomePage({ city, input, Enter}: Props) {
         value={city}
         onChange={input}
         className="searchBar"
-        onKeyDown={(e) => e.key === 'Enter' && Enter()}
       />
+      {results && results.length > 0 &&
+        <div className="menu-container" id="scrollable-menu">
+          {results.map((c, i) => (
+            <div
+              key={i}
+              className="menu-item"
+              onClick={() => onSelect(c)}
+            >
+              {c.name}, {c.country}
+            </div>
+          ))}
+        </div>
+      }
       <div className="container">
         <h2>Search for a city to get started</h2>
         <p>Enter a city name above to see its air quality data</p>

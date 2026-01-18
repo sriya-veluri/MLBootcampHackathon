@@ -4,16 +4,15 @@ body {
 }
 
 .searchBar {
-  width: 53%;
-  height: 42px;
-  background-color: white;
-  border-color: white;
-  border-radius: 15px;
-  padding: 3px;
-  padding-left: 20px;
-  margin-top: 20px;
-  margin-bottom: 30px;
-  font-size: 16px;
+    width: 53%;
+    height: 42px;
+    background-color: white;
+    border-color: white;
+    border-radius: 15px;
+    padding: 3px;
+    padding-left: 20px;
+    margin-top: 20px;
+    font-size: 16px;
 }
 
 .container {
@@ -25,6 +24,31 @@ body {
     place-content: center;
     text-align: center;
     border-radius: 20px;
+}
+
+.menu-container {
+    width: 53%;
+    height: auto;
+    max-height: 100px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    background-color: white;
+    border-color: white;
+    border-radius: 15px;
+    padding: 3px;
+    padding-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    font-size: 16px;
+    overflow-y: auto;
+}
+
+.menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #161313;
 }
 
 .center {
