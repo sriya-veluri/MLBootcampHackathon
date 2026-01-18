@@ -36,7 +36,11 @@
 
 .status-very-unhealthy {
     background-color: #8b2e9f;
-    color: #370b41;
+    color: #0f0910;
+}
+.status-none {
+    background-color: #6f6766;
+    color: #121213;
 }
 
 .card-header {

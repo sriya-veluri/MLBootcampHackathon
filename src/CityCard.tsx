@@ -1,14 +1,15 @@
 import './CityCard.css'
+import { AirQualityData } from './types';
 
 type Props = {
     city: string;
     location: string;
-    value: number;
+    aqd: AirQualityData;
     status: string;
     timestamp: Date;
 };
 
-function CityCard ({city, location, value, status, timestamp}: Props) {
+function CityCard ({city, location, aqd, status, timestamp}: Props) {
     return(
         <div className="city-container">
             <div className="card-header">
@@ -33,11 +34,24 @@ function CityCard ({city, location, value, status, timestamp}: Props) {
                         <p>{status}</p>
                     </div>
                 )}
+                {status === "No Data" && (
+                    <div className="status status-none">
+                        <p>{status}</p>
+                    </div>
+                )}
             </div>
 
             <div className="value-row">
-                <p className="value">{value}</p>
-                <p style={{fontSize:"30px", color:"#666666"}}>μg/m<sup>3</sup></p>
+                {aqd.pm25 == null && (
+                    <p className="value">No Data</p>
+                )}
+
+                {aqd.pm25 != null && (
+                    <div>
+                        <p className="value">{aqd.pm25}</p>
+                        <p style={{ fontSize: "30px", color: "#666666" }}>{aqd.unit}</p>
+                    </div>
+                )}
             </div>
 
             <span>PM2.5</span>

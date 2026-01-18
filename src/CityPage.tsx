@@ -1,16 +1,16 @@
 import './City.css';
 import CityCard from './CityCard'
-import { City } from "./types";
+import { AirQualityData, City } from "./types";
 
 type Props = {
     city: string;
-    airquality?: number;
+    aqd: AirQualityData;
     Back: () => void;
 };
 
-const status = (airquality?: number): string => {
+const status = (airquality: number | null): string => {
     if (airquality == null) {
-        return "No data"
+        return "No Data"
     }
     if (airquality >= 0 && airquality <= 12) {
       return "Good"
@@ -26,9 +26,9 @@ const status = (airquality?: number): string => {
     }
 };
 
-function CityPage({ city, airquality, Back }: Props) {
-    const value = 42;
-    const stat = status(airquality);
+function CityPage({ city, aqd, Back }: Props) {
+    const value = aqd;
+    const stat = status(aqd.pm25);
     const timestamp = new Date();
     const dispcity = city;
     const location = "loc";
@@ -42,7 +42,7 @@ function CityPage({ city, airquality, Back }: Props) {
                 {(<CityCard
                     city={dispcity}
                     location={location}
-                    value={value}
+                    aqd={value}
                     status={stat}
                     timestamp={timestamp}
                 />)}

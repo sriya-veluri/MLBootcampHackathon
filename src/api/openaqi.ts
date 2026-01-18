@@ -5,10 +5,16 @@ const API_KEY = "9921b318c8bd88c80fc00f8a9139a53d852fe077ef50e42a3ca95d7f34986fe
 const BASE_URL = "/api";
 
 // Main function that searches by coordinates
-export const fetchAirQualityByCoordinates = async (latitude: number, longitude: number): Promise<AirQualityData[]> => {
+export const fetchAirQualityByCoordinates = async (latitude: number, longitude: number): Promise<AirQualityData> => {
+/*
+    Searches for PM2.5 monitoring stations near the given coordinates
+    Finds an active monitoring station (updated within the last 7 days)
+    Fetches the latest PM2.5 measurement from that station
+    Returns the data in the correct format
+*/
     try { 
         // Step 1: Search for nearby PM2.5 monitors using bounding box
-        
+
 
         // Step 2: Find the most recently active location
         
@@ -21,11 +27,21 @@ export const fetchAirQualityByCoordinates = async (latitude: number, longitude: 
 
         // Match measurement to PM2.5 sensor by sensorsId
 
-        return results;
+        return {
+            locationName: "Unknown",
+            pm25: null,
+            unit: "µg/m³",
+            lastUpdated: new Date().toISOString(),
+        };
     }
     catch (error) {
         console.error("OpenAqi error:", error);
-        return [];
+        return {
+            locationName: "Unknown",
+            pm25: null,
+            unit: "µg/m³",
+            lastUpdated: new Date().toISOString(),
+        };
     }
 };
 
