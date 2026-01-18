@@ -6,12 +6,6 @@ const BASE_URL = "/api";
 
 // Main function that searches by coordinates
 export const fetchAirQualityByCoordinates = async (latitude: number, longitude: number): Promise<AirQualityData> => {
-/*
-    Searches for PM2.5 monitoring stations near the given coordinates
-    Finds an active monitoring station (updated within the last 7 days)
-    Fetches the latest PM2.5 measurement from that station
-    Returns the data in the correct format
-*/
     try { 
         // Step 1: Search for nearby PM2.5 monitors using bounding box
         // bouding box (10km)
@@ -21,28 +15,63 @@ export const fetchAirQualityByCoordinates = async (latitude: number, longitude: 
         const maxLong = longitude + 0.1;
 
         const url = `${BASE_URL}/locations?bbox=${minLong},${minLat},${maxLong},${maxLat}&parameter=pm25&limit=10`;
-        const response = await fetch(url);
+        const response = await fetch(url, {
+            headers: {
+                "X-API-Key": API_KEY
+            }
+        });
 
         if (!response.ok) {
             throw new Error(`OpenAqi Error: ${response.status}`);
         }
 
+        const data: LocationSearchResponse = await response.json();
+
         // Step 2: Find the most recently active location
-        
-
+        const results = data.results
         // Find PM2.5 sensor
-        
+        .filter((item: any) => 
+            Date.now() - new Date(item.datetimeLast.utc).getTime() <= 7*24*60*60*1000 &&
+            item.sensors.some((s: any) => s.parameter.id === 2)
+        )
+        .map((item: any) => ({
+            id: item.id,
+            name: item.name,
+            lat: item.coordinates.latitude,
+            lng: item.coordinates.longitude,
+            country: item.country,
+            lastUpdated: item.datetimeLast.utc,
+            sensorId: item.sensors.find((s: any) => s.parameter.id === 2),
+        }))
+        .sort((a, b) => 
+            new Date(b.lastUpdated).getTime() - new Date(a.lastUpdated).getTime()
+        );
 
-        // Step 3: Get latest measurements
+        // most active location
+        const location = results[0];
+        console.log("Most recent active location:"+ JSON.stringify(location));
         
+        // Step 3: Get latest measurements
+        const latesturl = `${BASE_URL}/sensors/${location.sensorId.id}`;
+
+        const latestresponse = await fetch(latesturl, {
+            headers: { "X-API-Key": API_KEY },
+        });
+
+        if (!latestresponse.ok) {
+            throw new Error(`OpenAqi Latest Measurement Error: ${latestresponse.status}`);
+        }
+
+        const latestdata = await latestresponse.json();
 
         // Match measurement to PM2.5 sensor by sensorsId
+        const measurement = latestdata.results[0].latest;
 
         return {
-            locationName: "Unknown",
-            pm25: null,
-            unit: "µg/m³",
-            lastUpdated: new Date().toISOString(),
+            locationName: location.name,
+            pm25: Math.round(measurement.value),
+            unit: location.sensorId.parameter.units,
+            lastUpdated: measurement.datetime.utc
         };
     }
     catch (error) {
@@ -51,9 +80,17 @@ export const fetchAirQualityByCoordinates = async (latitude: number, longitude: 
             locationName: "Unknown",
             pm25: null,
             unit: "µg/m³",
-            lastUpdated: new Date().toISOString(),
+            lastUpdated: new Date().toISOString()
         };
     }
 };
+
+(async () => {
+    // testing
+    const latitude = 40.7128;
+    const longitude = -74.0060;
+    const airQuality = await fetchAirQualityByCoordinates(latitude, longitude);
+    console.log(JSON.stringify(airQuality, null, 2));
+})();
 
 export const fetchAirQuality = fetchAirQualityByCoordinates;

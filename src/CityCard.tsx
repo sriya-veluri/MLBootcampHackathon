@@ -41,18 +41,17 @@ function CityCard ({city, location, aqd, status, timestamp}: Props) {
                 )}
             </div>
 
-            <div className="value-row">
-                {aqd.pm25 == null && (
-                    <p className="value">No Data</p>
-                )}
+            
+            {aqd.pm25 == null && (
+                <p className="value">No Data</p>
+            )}
 
-                {aqd.pm25 != null && (
-                    <div>
-                        <p className="value">{aqd.pm25}</p>
-                        <p style={{ fontSize: "30px", color: "#666666" }}>{aqd.unit}</p>
-                    </div>
-                )}
-            </div>
+            {aqd.pm25 != null && (
+                <div className="value-row">
+                    <p className="value">{aqd.pm25}</p>
+                    <p style={{ fontSize: "30px", color: "#666666" }}>{aqd.unit}</p>
+                </div>
+            )}
 
             <span>PM2.5</span>
             <div className="gradient-line"></div>
