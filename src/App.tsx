@@ -1,21 +1,27 @@
 import HomePage from './HomePage'
 import CityPage from './CityPage'
 import { useState } from 'react';
+import { City } from "./types";
+import { searchCities } from "./api/geocoding";
+import { GeocodingResult } from "./types";
+import { fetchAirQuality } from './api/openaqi';
 
 type Page = 'home' | 'city';
 
 const App = () => {
   const [page, setPage] = useState<Page>('home')
-  const [city, setCity] = useState('');
+  const [city, setCity] = useState<City>();
+  const [cityString, setCityString] = useState('');
 
   const input = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCity(event.target.value);
+    setCityString(event.target.value);
   };
+
   return (
     <>
       {page === 'home' && (
         <HomePage
-          city={city}
+          city={cityString}
           input={input}
           Enter={() => setPage('city')}
         />
@@ -23,7 +29,9 @@ const App = () => {
 
       {page === 'city' && (
         <CityPage
-          city={city}
+          city={cityString}
+          //airquality={fetchAirQuality}
+          airquality = {100} // testing 
           Back={() => setPage('home')}
         />
       )}

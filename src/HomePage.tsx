@@ -1,5 +1,4 @@
 import './Home.css';
-import React, { useState } from 'react';
 
 type Props = {
   city: string;

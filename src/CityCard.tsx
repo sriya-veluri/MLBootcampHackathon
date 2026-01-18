@@ -1,12 +1,12 @@
 import './CityCard.css'
 
-type Props={
+type Props = {
     city: string;
     location: string;
     value: number;
     status: string;
     timestamp: Date;
-}
+};
 
 function CityCard ({city, location, value, status, timestamp}: Props) {
     return(
