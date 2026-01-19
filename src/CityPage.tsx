@@ -1,11 +1,11 @@
+import { useNavigate } from 'react-router-dom';
 import './City.css';
 import CityCard from './CityCard'
 import { AirQualityData } from "./types";
 
 type Props = {
     city: string;
-    aqd: AirQualityData;
-    Back: () => void;
+    aqd?: AirQualityData;
 };
 
 const status = (airquality: number | null): string => {
@@ -26,16 +26,17 @@ const status = (airquality: number | null): string => {
     }
 };
 
-function CityPage({ city, aqd, Back }: Props) {
+function CityPage({ city, aqd}: Props) {
     const value = aqd;
-    const stat = status(aqd.pm25);
-    const timestamp = aqd.lastUpdated;
+    const stat = status(aqd?.pm25 ?? null);
+    const timestamp = aqd?.lastUpdated ?? "Unknown";
     const dispcity = city;
-    const location = aqd.locationName;
+    const location = aqd?.locationName ?? "Unknown";
+    const navigate = useNavigate();
     return (
         <>
             <div className="header">
-                <button className="btn" onClick={Back}> ← Back to Search</button>
+                <button className="btn" onClick={() => navigate('/')}> ← Back to Search</button>
                 <h1>🌏 Air Quality Tracker</h1>
             </div>
             <div className="city-center">

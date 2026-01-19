@@ -1,14 +1,28 @@
+import * as React from 'react';
+import { createBrowserRouter, Route, RouterProvider, Routes, useNavigate } from "react-router-dom";
+import { useRouteError } from "react-router-dom";
+
 import HomePage from './HomePage'
 import CityPage from './CityPage'
+
 import { useState, useEffect } from 'react';
 import { AirQualityData, GeocodingResult } from "./types";
 import { searchCities } from "./api/geocoding";
 import { fetchAirQuality } from './api/openaqi';
 
-type Page = 'home' | 'city';
+function ErrorPage() {
+  const error = useRouteError();
+  console.error(error);
+
+  return (
+    <div id="error-page">
+      <h1>Oops!</h1>
+      <p>Sorry, an unexpected error has occurred.</p>
+    </div>
+  );
+}
 
 const App = () => {
-  const [page, setPage] = useState<Page>('home')
   const [results, setResults] = useState<GeocodingResult[]>();
   const [cityString, setCityString] = useState('');
   const [airquality, setAirQuality] = useState<AirQualityData>();
@@ -35,6 +49,8 @@ const App = () => {
     getCities();
   }, [cityString]);
 
+  const navigate = useNavigate();
+
   const selectCity = async (c: GeocodingResult) => {
     setCityString(c.name);
     setResults([]);
@@ -42,31 +58,30 @@ const App = () => {
     try {
       const aq = await fetchAirQuality(c.lat, c.lng);
       setAirQuality(aq);
-      setPage('city');
     } catch (error) {
       console.error("Error fetching air quality:", error);
     }
+
+    navigate(`/city/${encodeURIComponent(c.name)}`);
   };
 
   return (
-    <>
-      {page === 'home' && (
-        <HomePage
-          city={cityString}
-          input={input}
-          results={results}
-          onSelect={selectCity}
-        />
-      )}
-
-      {page === 'city' && airquality && (
-        <CityPage
-          city={cityString}
-          aqd={airquality}
-          Back={() => setPage('home')}
-        />
-      )} 
-    </>
+    <Routes>
+      <Route path="/" element=
+      {<HomePage 
+        city={cityString}
+        input={input}
+        results={results}
+        onSelect={selectCity}
+      />}
+      errorElement= {<ErrorPage />} />
+      <Route path="/city/:cityName" element=
+      {<CityPage
+        city={cityString}
+        aqd={airquality}
+      />}
+      errorElement= {<ErrorPage />} />
+    </Routes>
   );
 };
 

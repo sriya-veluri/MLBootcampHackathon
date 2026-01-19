@@ -4,7 +4,7 @@ import { AirQualityData } from './types';
 type Props = {
     city: string;
     location: string;
-    aqd: AirQualityData;
+    aqd?: AirQualityData;
     status: string;
     timestamp: string;
 };
@@ -42,13 +42,13 @@ function CityCard ({city, location, aqd, status, timestamp}: Props) {
             </div>
 
             
-            {aqd.pm25 == null && (
+            {aqd?.pm25 == null && (
                 <div className="value-row">
                     <p className="value">No Data</p>
                 </div>
             )}
 
-            {aqd.pm25 != null && (
+            {aqd?.pm25 != null && (
                 <div className="value-row">
                     <p className="value">{aqd.pm25}</p>
                     <p style={{ fontSize: "30px", color: "#666666" }}>{aqd.unit}</p>
