@@ -1,7 +1,7 @@
 import HomePage from './HomePage'
 import CityPage from './CityPage'
 import { useState, useEffect } from 'react';
-import { AirQualityData, City } from "./types";
+import { AirQualityData, GeocodingResult } from "./types";
 import { searchCities } from "./api/geocoding";
 import { fetchAirQuality } from './api/openaqi';
 
@@ -9,8 +9,7 @@ type Page = 'home' | 'city';
 
 const App = () => {
   const [page, setPage] = useState<Page>('home')
-  const [city, setCity] = useState<City>();
-  const [results, setResults] = useState<City[]>();
+  const [results, setResults] = useState<GeocodingResult[]>();
   const [cityString, setCityString] = useState('');
   const [airquality, setAirQuality] = useState<AirQualityData>();
 
@@ -36,8 +35,7 @@ const App = () => {
     getCities();
   }, [cityString]);
 
-  const selectCity = async (c: City) => {
-    setCity(c);
+  const selectCity = async (c: GeocodingResult) => {
     setCityString(c.name);
     setResults([]);
 

@@ -1,6 +1,6 @@
 import './City.css';
 import CityCard from './CityCard'
-import { AirQualityData, City } from "./types";
+import { AirQualityData } from "./types";
 
 type Props = {
     city: string;

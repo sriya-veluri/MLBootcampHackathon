@@ -1,5 +1,4 @@
 import { AirQualityData, LatestMeasurementResponse, LocationSearchResponse } from "../types";
-import { searchCities } from '../api/geocoding'; 
 
 const API_KEY = "9921b318c8bd88c80fc00f8a9139a53d852fe077ef50e42a3ca95d7f34986fef";
 const BASE_URL = "/api";
@@ -9,10 +8,10 @@ export const fetchAirQualityByCoordinates = async (latitude: number, longitude: 
     try { 
         // Step 1: Search for nearby PM2.5 monitors using bounding box
         // bounding box (25km)
-        const minLat = latitude - 0.25;
-        const maxLat = latitude + 0.25;
-        const minLong = longitude - 0.25;
-        const maxLong = longitude + 0.25;
+        const minLat = latitude - 0.2;
+        const maxLat = latitude + 0.2;
+        const minLong = longitude - 0.2;
+        const maxLong = longitude + 0.2;
 
         const url = `${BASE_URL}/locations?bbox=${minLong},${minLat},${maxLong},${maxLat}&parameter=pm25&limit=10`;
         const response = await fetch(url, {

@@ -1,11 +1,11 @@
 import './Home.css';
-import { City } from "./types";
+import { GeocodingResult } from "./types";
 
 type Props = {
   city: string;
   input: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  results?: City[];
-  onSelect: (city: City) => void;
+  results?: GeocodingResult[];
+  onSelect: (city: GeocodingResult) => void;
 };
 
 function HomePage({ city, input, results, onSelect }: Props) {
@@ -28,7 +28,7 @@ function HomePage({ city, input, results, onSelect }: Props) {
               className="menu-item"
               onClick={() => onSelect(c)}
             >
-              {c.name}, {c.country}
+              {c.displayName}
             </div>
           ))}
         </div>
