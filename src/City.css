@@ -32,5 +32,6 @@ body {
     color: white;
     margin-left: 50px;
     border-radius: 10px;
+    cursor: pointer;
 }
 

@@ -29,9 +29,9 @@ const status = (airquality: number | null): string => {
 function CityPage({ city, aqd, Back }: Props) {
     const value = aqd;
     const stat = status(aqd.pm25);
-    const timestamp = new Date();
+    const timestamp = aqd.lastUpdated;
     const dispcity = city;
-    const location = "loc";
+    const location = aqd.locationName;
     return (
         <>
             <div className="header">

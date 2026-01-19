@@ -8,11 +8,11 @@ const BASE_URL = "/api";
 export const fetchAirQualityByCoordinates = async (latitude: number, longitude: number): Promise<AirQualityData> => {
     try { 
         // Step 1: Search for nearby PM2.5 monitors using bounding box
-        // bouding box (10km)
-        const minLat = latitude - 0.1;
-        const maxLat = latitude + 0.1;
-        const minLong = longitude - 0.1;
-        const maxLong = longitude + 0.1;
+        // bounding box (25km)
+        const minLat = latitude - 0.25;
+        const maxLat = latitude + 0.25;
+        const minLong = longitude - 0.25;
+        const maxLong = longitude + 0.25;
 
         const url = `${BASE_URL}/locations?bbox=${minLong},${minLat},${maxLong},${maxLat}&parameter=pm25&limit=10`;
         const response = await fetch(url, {
@@ -70,7 +70,7 @@ export const fetchAirQualityByCoordinates = async (latitude: number, longitude: 
         return {
             locationName: location.name,
             pm25: Math.round(measurement.value),
-            unit: location.sensorId.parameter.units,
+            unit: "µg/m³",
             lastUpdated: measurement.datetime.utc
         };
     }
@@ -80,17 +80,9 @@ export const fetchAirQualityByCoordinates = async (latitude: number, longitude: 
             locationName: "Unknown",
             pm25: null,
             unit: "µg/m³",
-            lastUpdated: new Date().toISOString()
+            lastUpdated: "Unknown"
         };
     }
 };
-
-(async () => {
-    // testing
-    const latitude = 40.7128;
-    const longitude = -74.0060;
-    const airQuality = await fetchAirQualityByCoordinates(latitude, longitude);
-    console.log(JSON.stringify(airQuality, null, 2));
-})();
 
 export const fetchAirQuality = fetchAirQualityByCoordinates;

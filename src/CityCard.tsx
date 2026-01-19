@@ -6,7 +6,7 @@ type Props = {
     location: string;
     aqd: AirQualityData;
     status: string;
-    timestamp: Date;
+    timestamp: string;
 };
 
 function CityCard ({city, location, aqd, status, timestamp}: Props) {
