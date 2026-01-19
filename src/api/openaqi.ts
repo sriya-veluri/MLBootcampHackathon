@@ -70,7 +70,7 @@ export const fetchAirQualityByCoordinates = async (latitude: number, longitude: 
             locationName: location.name,
             pm25: Math.round(measurement.value),
             unit: "µg/m³",
-            lastUpdated: measurement.datetime.utc
+            lastUpdated: new Date(measurement.datetime.utc).toLocaleString("en-US")
         };
     }
     catch (error) {
