@@ -11,8 +11,8 @@ type Props = {
 function HomePage({ city, input, results, onSelect }: Props) {
   return (
     <div className="center">
-      <h1>🌏 Air Quality Tracker</h1>
-      <p style={{ color: "white" }}>Search for any city to see PM2.5 air quality data</p>
+      <h1>Air Quality Predictor</h1>
+      <p style={{ color: "white" }}>Search for any city to see air quality data</p>
       <input
         type="text"
         placeholder='Search for a city (e.g., Tokyo, Paris, New York)...'

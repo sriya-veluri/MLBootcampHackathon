@@ -8,8 +8,13 @@ export interface City {
 export interface AirQualityData {
   locationName: string;
   pm25: number | null;
+  co_aqi: number | null;
+  ozone_aqi: number | null;
+  no2_aqi: number | null;
   unit: string;
   lastUpdated: string;
+  predictedAqi?: number;
+  predictedCategory?: string;
 }
 
 export interface LocationSearchResponse {
@@ -53,7 +58,6 @@ export interface LatestMeasurementResponse {
   }>;
 }
 
-// geocoding api
 export interface GeocodingResult {
   name: string;
   displayName: string;

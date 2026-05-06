@@ -37,7 +37,7 @@ function CityPage({ city, aqd}: Props) {
         <>
             <div className="header">
                 <button className="btn" onClick={() => navigate('/')}> ← Back to Search</button>
-                <h1>🌏 Air Quality Tracker</h1>
+                <h1>Air Quality Predictor</h1>
             </div>
             <div className="city-center">
                 {(<CityCard

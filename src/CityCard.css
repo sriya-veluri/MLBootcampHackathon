@@ -1,6 +1,6 @@
 .city-container {
     width: 40%;
-    height: 420px;
+    min-height: 420px;
     background-color: white;
     margin-top: 100px;
     border-radius: 20px;
@@ -19,29 +19,11 @@
     font-weight: bold;
 }
 
-.status-good {
-    background-color: #28a745;
-    color: #0f401b;
-}
-
-.status-moderate {
-    background-color: #ffc107;
-    color: #4c3c0a;
-}
-
-.status-unhealthy {
-    background-color: #dc3545;
-    color: #4d0910;
-}
-
-.status-very-unhealthy {
-    background-color: #8b2e9f;
-    color: #0f0910;
-}
-.status-none {
-    background-color: #6f6766;
-    color: #121213;
-}
+.status-good          { background-color: #28a745; color: #0f401b; }
+.status-moderate      { background-color: #ffc107; color: #4c3c0a; }
+.status-unhealthy     { background-color: #dc3545; color: #4d0910; }
+.status-very-unhealthy{ background-color: #8b2e9f; color: #0f0910; }
+.status-none          { background-color: #6f6766; color: #121213; }
 
 .card-header {
     display: flex;
@@ -58,9 +40,7 @@
     gap: 10px;
 }
 
-.value-row p {
-    margin: 0;
-}
+.value-row p { margin: 0; }
 
 .value {
     font-size: 90px;
@@ -73,6 +53,7 @@
 .info {
     margin-left: 30px;
     margin-top: 10px;
+    padding-bottom: 16px;
 }
 
 .label {
@@ -83,7 +64,6 @@
 }
 
 .gradient-line {
-    margin-top: 20px;
     height: 0.5px;
     margin: 20px auto;
     background-image: linear-gradient(90deg, rgb(55, 52, 52) 10%, rgb(222, 222, 229) 90%);
@@ -96,4 +76,3 @@ span {
     text-align: center;
     color: #666666;
 }
-
