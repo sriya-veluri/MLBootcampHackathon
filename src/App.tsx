@@ -8,7 +8,7 @@ import CityPage from './CityPage';
 
 import { AirQualityData, GeocodingResult } from "./types";
 import { searchCities } from "./api/geocoding";
-import { fetchAirQuality } from './api/openaqi';
+import { fetchAQIComparison } from './api/dataset';
 
 function ErrorPage() {
   const error = useRouteError();
@@ -52,12 +52,13 @@ const App = () => {
     setCityString(c.name);
     setResults([]);
     try {
-      const aq = await fetchAirQuality(c.lat, c.lng);
+      const aq = await fetchAQIComparison(c.name, c.country);
       setAirQuality(aq);
     } catch (error) {
-      console.error("Error fetching air quality:", error);
+      console.error("Error fetching AQI comparison:", error);
     }
-    navigate(`/city/${encodeURIComponent(c.name)}`);
+    const countryParam = c.country ? `?country=${encodeURIComponent(c.country)}` : '';
+    navigate(`/city/${encodeURIComponent(c.name)}${countryParam}`);
   };
 
   return (

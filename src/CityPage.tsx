@@ -1,38 +1,43 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import './City.css';
 import CityCard from './CityCard'
 import { AirQualityData } from "./types";
+import { fetchAQIComparison } from './api/dataset';
 
 type Props = {
     city: string;
     aqd?: AirQualityData;
 };
 
-const status = (airquality: number | null): string => {
-    if (airquality == null) {
-        return "No Data"
-    }
-    if (airquality >= 0 && airquality <= 12) {
-      return "Good"
-    }
-    else if (airquality >= 12 && airquality <= 35) {
-        return "Moderate"
-    }
-    else if (airquality >= 35 && airquality <= 55) {
-        return "Unhealthy"
-    }
-    else {
-        return "Very Unhealthy"
-    }
-};
-
 function CityPage({ city, aqd}: Props) {
-    const value = aqd;
-    const stat = status(aqd?.pm25 ?? null);
-    const timestamp = aqd?.lastUpdated ?? "Unknown";
-    const dispcity = city;
-    const location = aqd?.locationName ?? "Unknown";
+    const { cityName } = useParams<{ cityName: string }>();
+    const [searchParams] = useSearchParams();
+    const country = searchParams.get('country') || undefined;
+    const [data, setData] = useState<AirQualityData | undefined>(aqd);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (cityName) {
+            setData(undefined); // Clear old data while loading
+            const loadData = async () => {
+                try {
+                    const result = await fetchAQIComparison(decodeURIComponent(cityName), country);
+                    setData(result);
+                } catch (error) {
+                    console.error("Error loading city data:", error);
+                }
+            };
+            loadData();
+        }
+    }, [cityName, country]);
+
+    const value = data;
+    const stat = data?.dataset_aqi_category ?? "No Data";
+    const timestamp = data?.lastUpdated ?? "Unknown";
+    const dispcity = city || cityName || "Unknown";
+    const location = data?.locationName ?? "Unknown";
+
     return (
         <>
             <div className="header">

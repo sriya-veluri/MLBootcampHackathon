@@ -5,16 +5,24 @@ export interface City {
   country?: string;
 }
 
-export interface AirQualityData {
-  locationName: string;
-  pm25: number | null;
-  co_aqi: number | null;
-  ozone_aqi: number | null;
-  no2_aqi: number | null;
-  unit: string;
-  lastUpdated: string;
-  predictedAqi?: number;
-  predictedCategory?: string;
+export interface AQIComparison {
+  city: string;
+  country: string;
+  dataset_aqi: number;
+  dataset_aqi_category: string;
+  predicted_aqi: number;
+  predicted_aqi_category: string;
+  difference: number;
+  co_aqi: number;
+  ozone_aqi: number;
+  no2_aqi: number;
+  pm25_aqi: number;
+}
+
+export interface AirQualityData extends AQIComparison {
+  locationName?: string;
+  unit?: string;
+  lastUpdated?: string;
 }
 
 export interface LocationSearchResponse {
